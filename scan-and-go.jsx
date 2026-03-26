@@ -435,7 +435,7 @@ function ShopperApp() {
       }}>
         <div style={{position:"absolute",right:-30,top:-30,width:140,height:140,borderRadius:"50%",background:"#FFFFFF0D"}}/>
         <div style={{position:"absolute",right:30,bottom:-20,width:80,height:80,borderRadius:"50%",background:"#FFFFFF0D"}}/>
-        <div style={{color:"#FFFFFFAA",fontSize:11,fontWeight:700,letterSpacing:2,textTransform:"uppercase"}}>{new Date().getHours() < 12 ? "Good Morning" : new Date().getHours() < 17 ? "Good Afternoon" : "Good Evening"} 👋</div>
+        <div style={{color:"#FFFFFFAA",fontSize:11,fontWeight:700,letterSpacing:2,textTransform:"uppercase"}}>{(h => h < 12 ? "Good Morning" : h < 17 ? "Good Afternoon" : "Good Evening")(new Date().getHours())} 👋</div>
         <div style={{color:"#FFF",fontSize:22,fontWeight:800,marginTop:6,lineHeight:1.25}}>Skip the queue,<br/>scan &amp; go 🛒</div>
         <div style={{marginTop:14,display:"flex",alignItems:"center",gap:8,flexWrap:"wrap"}}>
           <div style={{background:"#FFFFFF22",backdropFilter:"blur(4px)",borderRadius:20,padding:"5px 12px",display:"flex",alignItems:"center",gap:6}}>
@@ -553,7 +553,7 @@ function ShopperApp() {
                 <div style={{color:C.ink3,fontSize:11,marginTop:1}}>{inr(it.price)} each</div>
               </div>
               <div style={{display:"flex",alignItems:"center",gap:6}}>
-                <button onClick={() => chgQty(it.cid,-1)} disabled={it.qty === 1} aria-label={`Decrease quantity of ${it.name}`} style={{width:28,height:28,borderRadius:8,background:C.surfaceAlt,border:`1px solid ${C.border}`,color:it.qty===1?C.ink4:C.ink,cursor:it.qty===1?"not-allowed":"pointer",fontWeight:700,fontSize:15,display:"flex",alignItems:"center",justifyContent:"center",fontFamily:"inherit"}}>−</button>
+                <button onClick={() => chgQty(it.cid,-1)} disabled={it.qty === 1} aria-label={it.qty === 1 ? `Decrease quantity of ${it.name} — minimum quantity reached` : `Decrease quantity of ${it.name}`} style={{width:28,height:28,borderRadius:8,background:C.surfaceAlt,border:`1px solid ${C.border}`,color:it.qty===1?C.ink4:C.ink,cursor:it.qty===1?"not-allowed":"pointer",fontWeight:700,fontSize:15,display:"flex",alignItems:"center",justifyContent:"center",fontFamily:"inherit"}}>−</button>
                 <span style={{color:C.ink,fontWeight:800,fontSize:14,minWidth:22,textAlign:"center"}} aria-label={`Quantity: ${it.qty}`}>{it.qty}</span>
                 <button onClick={() => chgQty(it.cid, 1)} aria-label={`Increase quantity of ${it.name}`} style={{width:28,height:28,borderRadius:8,background:C.surfaceAlt,border:`1px solid ${C.border}`,color:C.ink,cursor:"pointer",fontWeight:700,fontSize:15,display:"flex",alignItems:"center",justifyContent:"center",fontFamily:"inherit"}}>+</button>
                 <button onClick={() => del(it.cid)} aria-label={`Remove ${it.name} from cart`} style={{width:28,height:28,borderRadius:8,background:C.redL,border:`1px solid ${C.red}22`,color:C.red,cursor:"pointer",fontSize:14,display:"flex",alignItems:"center",justifyContent:"center",fontFamily:"inherit"}}>✕</button>
@@ -1090,7 +1090,7 @@ export default function App() {
             boxShadow:`0 4px 12px ${C.blue}44`,
           }} aria-hidden="true">🛒</div>
           <div>
-            <div style={{fontWeight:900,fontSize:16,fontFamily:"'Plus Jakarta Sans','Inter',sans-serif",letterSpacing:-0.3,color:C.ink}} role="heading" aria-level={1}>ScanGo</div>
+            <h1 style={{fontWeight:900,fontSize:16,fontFamily:"'Plus Jakarta Sans','Inter',sans-serif",letterSpacing:-0.3,color:C.ink,margin:0}}>ScanGo</h1>
             <div style={{fontSize:9,color:C.ink4,letterSpacing:2,fontWeight:600,textTransform:"uppercase"}}>Retail OS · India</div>
           </div>
         </div>
